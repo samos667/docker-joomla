@@ -3,9 +3,12 @@ FROM php:${PHP_VERSION:+${PHP_VERSION}-}apache
 
 RUN apt update; \
     apt upgrade -y; \
-    apt install -y unzip;
+    apt install -y zip unzip libzip-dev;
 
-RUN docker-php-ext-install mysqli zip
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install zip
+
 
 RUN mkdir /var/log/joomla
 
