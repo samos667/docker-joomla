@@ -3,8 +3,6 @@ services:
   joomla:
     build:
       context: './joomla/'
-      args:
-       PHP_VERSION: ${PHP_VERSION}
     depends_on:
       - mariadb
     networks:
