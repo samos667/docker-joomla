@@ -5,7 +5,9 @@ RUN apt update; \
     apt upgrade -y; \
     apt install -y unzip;
 
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli zip
+
+RUN mkdir /var/log/joomla
 
 ADD https://downloads.joomla.org/cms/joomla3/3-9-26/Joomla_3-9-26-Stable-Full_Package.zip /tmp/joomla.zip
 RUN mkdir -p /var/www/html/joomla
