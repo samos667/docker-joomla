@@ -288,7 +288,7 @@ ENTRYPOINT ["docker-php-entrypoint"]
 STOPSIGNAL SIGWINCH
 
 COPY apache2-foreground /usr/local/bin/
-WORKDIR /var/www/html
+WORKDIR /var/www/html/joomla
 
 EXPOSE 80
 CMD ["apache2-foreground"]
