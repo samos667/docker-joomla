@@ -34,7 +34,7 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     container_name: db
     healthcheck:
-      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '--password=$$MYSQL_PASSWORD' ]
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '--password=$$MYSQL_ROOT_PASSWORD' ]
       interval: 1m30s
       timeout: 10s
       retries: 3
