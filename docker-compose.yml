@@ -15,7 +15,13 @@ services:
     volumes:
       - web_data/:/var/www/html/joomla
       - log/:/var/log/joomla
-    container_name: joomla
+    container_name: web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
   mariadb:
     image: mariadb:${MARIADB_VERSION}
     restart: always
@@ -29,6 +35,12 @@ services:
       MARIADB_USER: "${DB_USERNAME}"
       MARIADB_PASSWORD: "${DB_PASSWORD}"
     container_name: mariadb
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MARIADB_ROOT_PASSWORD' ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 networks:
   frontend:
   backend:
