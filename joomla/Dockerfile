@@ -12,7 +12,7 @@ RUN docker-php-ext-install zip
 
 RUN mkdir /var/log/joomla
 
-ADD https://downloads.joomla.org/cms/joomla3/3-9-26/Joomla_3-9-26-Stable-Full_Package.zip /tmp/joomla.zip
+ADD https://downloads.joomla.org/cms/joomla3/3-9-26/Joomla_3-9-27-Stable-Full_Package.zip /tmp/joomla.zip
 RUN mkdir -p /var/www/html/joomla
 RUN unzip /tmp/joomla.zip -d /var/www/html/joomla
 RUN chown -R www-data:www-data /var/www/html/joomla
