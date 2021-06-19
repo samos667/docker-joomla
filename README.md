@@ -1,5 +1,4 @@
 Pour ce TP récapitulatif, il vous est demandé de conteneurisation l'application CMS joomla (https://www.joomla.org/)
-
 en respectant les critères ci-dessous:
 
 séparer autant que possible le services nécessaires à joomla dans des images docker séparées
