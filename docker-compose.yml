@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  joomla:
+    build:
+      context: './joomla/'
+      args:
+       PHP_VERSION: ${PHP_VERSION}
+    depends_on:
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - joomla_data/:/var/www/html/joomla
+    container_name: joomla
+  mysql:
+    image: mariadb:${MARIADB_VERSION}
+    restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    container_name: mysql
+networks:
+  frontend:
+  backend:
+volumes:
+    mariadb_data:
+    joomla_data:
