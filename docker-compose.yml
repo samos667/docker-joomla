@@ -34,12 +34,12 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     container_name: db
     healthcheck:
-      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MARIADB_ROOT_PASSWORD' ]
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$DB_ROOT_PASSWORD' ]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-      
+
 networks:
   frontend:
   backend:
