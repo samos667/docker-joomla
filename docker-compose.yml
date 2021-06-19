@@ -4,7 +4,7 @@ services:
     build:
       context: './joomla/'
     depends_on:
-      - mariadb
+      - db
     networks:
       - frontend
       - backend
@@ -24,7 +24,7 @@ services:
     image: mariadb:${MARIADB_VERSION}
     restart: always
     volumes:
-      - db_data:/var/lib/mariadb
+      - db:/var/lib/mariadb
     networks:
       - backend
     environment:
