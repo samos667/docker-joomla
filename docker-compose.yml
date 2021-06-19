@@ -15,7 +15,7 @@ services:
     volumes:
       - web_data/:/var/www/html/joomla
       - log/:/var/log/joomla
-    container_name: web
+    container_name: joomla
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 1m30s
