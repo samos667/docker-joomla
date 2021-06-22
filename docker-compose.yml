@@ -3,48 +3,48 @@ services:
   joomla:
     build:
       context: './joomla/'
+      args:
+       PHP_VERSION: ${PHP_VERSION}
     depends_on:
-      - db
+      - mariadb
     networks:
       - frontend
       - backend
     ports:
       - "80:80"
     volumes:
-      - data/:/var/www/html/joomla
+      - web_data/:/var/www/html/joomla
       - log/:/var/log/joomla
-    container_name: joomla
+    container_name: web
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-  db:
+  mariadb:
     image: mariadb:${MARIADB_VERSION}
     restart: always
     volumes:
-      - db:/var/lib/mariadb
+      - mariadb_data:/var/lib/mariadb
     networks:
       - backend
     environment:
-      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-    container_name: db
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MARIADB_DATABASE: "${DB_NAME}"
+      MARIADB_USER: "${DB_USERNAME}"
+      MARIADB_PASSWORD: "${DB_PASSWORD}"
+    container_name: mariadb
     healthcheck:
-      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '--password=$$MYSQL_ROOT_PASSWORD' ]
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MARIADB_ROOT_PASSWORD' ]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-
 networks:
   frontend:
   backend:
-
 volumes:
-    db:
-    data:
+    mariadb_data:
+    web_data:
     log:
