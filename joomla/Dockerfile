@@ -1,5 +1,6 @@
 ARG PHP_VERSION=""
 FROM php:${PHP_VERSION:+${PHP_VERSION}-}apache
+LABEL org.opencontainers.image.authors="sammyetur11@gmail.com"
 
 RUN apt update; \
     apt upgrade -y; \
